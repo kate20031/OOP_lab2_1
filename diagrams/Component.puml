@@ -1,0 +1,21 @@
+@startuml
+component "Bus Data Loader" as BDL
+component "Bus API" as API
+component "Utils" as UTL
+component "Database" as DB
+component "Analytics" as ANA
+
+interface IDataFetcher
+interface IDataProcessor
+interface IAnalytics
+
+BDL --> API : fetchData()
+BDL --> UTL : processData()
+UTL --> DB : storeData()
+BDL --> ANA : analyzeData()
+ANA --> DB : fetchData()
+
+BDL ..|> IDataFetcher
+UTL ..|> IDataProcessor
+ANA ..|> IAnalytics
+@enduml

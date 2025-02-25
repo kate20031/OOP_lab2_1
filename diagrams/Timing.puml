@@ -1,0 +1,28 @@
+@startuml
+scale 100
+
+participant "BusTracker" as BT
+participant "BusDataLoader" as BDL
+participant "BusStationDataLoader" as BSD
+participant "BusTimetableDataLoader" as BTD
+participant "BusDataAnalyzer" as BDA
+participant "UserInterface" as UI
+
+== Bus Tracking Process ==
+BT -> BDL : Request bus tracking data
+BDL -> BT : Send bus positions & speeds
+
+== Station Data Request ==
+BT -> BSD : Request station data
+BSD -> BT : Send station locations
+
+== Timetable Data Request ==
+BT -> BTD : Request timetable data
+BTD -> BT : Send timetable info
+
+== Punctuality Analysis ==
+BT -> BDA : Analyze punctuality
+BDA -> UI : Generate report
+UI -> BT : Display punctuality stats
+
+@enduml

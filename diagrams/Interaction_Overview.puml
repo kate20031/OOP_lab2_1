@@ -1,0 +1,33 @@
+@startuml
+start
+
+:User requests bus tracking report;
+partition "BusTracker" {
+    :Request bus tracking data;
+    :Request station data;
+    :Request timetable data;
+}
+
+if (Data available?) then (yes)
+    partition "Data Loaders" {
+        :Load bus data;
+        :Load station data;
+        :Load timetable data;
+    }
+
+    partition "Analyzer" {
+        :Analyze punctuality;
+        :Generate report;
+    }
+
+    partition "User Interface" {
+        :Display statistics;
+    }
+
+    :End of process;
+else (no)
+    :Show error message;
+endif
+
+stop
+@enduml

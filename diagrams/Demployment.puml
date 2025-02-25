@@ -1,0 +1,23 @@
+@startuml
+node "User Device" as Client {
+    artifact "Bus Tracking App" as App
+}
+
+node "Backend Server" as Server {
+    artifact "Bus Data Service" as BusService
+    artifact "Analytics Module" as Analytics
+}
+
+node "Database Server" as DB {
+    artifact "Database" as BusDB
+}
+
+Client --> App
+Server --> BusService
+Server --> Analytics
+DB --> BusDB
+
+Client <--> Server : HTTP Requests
+Server <--> DB : SQL Queries
+Server <--> "External API" : Fetch Bus Data
+@enduml

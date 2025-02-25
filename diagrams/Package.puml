@@ -1,0 +1,29 @@
+@startuml
+package "data_loaders" {
+  [bus_data_loader.py]
+  [bus_timetable_data_loader.py]
+}
+
+package "src" {
+  [bus_analytics.py]
+  [bus_data_calculations.py]
+}
+
+package "output" {
+  [bus_coord_output1.csv]
+  [bus_coord_output2.csv]
+  [bus_punctuality_accuracy1.csv]
+  [bus_punctuality_accuracy2.csv]
+  [bus_station_coord_output.csv]
+  [punctual_buses1.csv]
+  [punctual_buses2.csv]
+}
+
+package "tests" {
+  [main.py]
+}
+
+data_loaders --> src : Provides data
+src --> output : Generates output files
+tests --> src : Tests the logic
+@enduml

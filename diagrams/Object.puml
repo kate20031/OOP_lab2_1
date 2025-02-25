@@ -1,0 +1,51 @@
+@startuml
+object busTracker {
+  data_loader = busTrackingDataLoader
+  station_loader = busStationDataLoader
+  timetable_loader = busTimetableDataLoader
+  analyzer = busDataAnalyzer
+}
+
+object busTrackingDataLoader {
+  loads_vehicle_data = ["Bus1: 52.5200, 13.4050, 60 km/h", "Bus2: 51.1657, 10.4515, 55 km/h"]
+}
+
+object busStationDataLoader {
+  loads_bus_station_data = ["Station A: 52.5205, 13.4049", "Station B: 51.1658, 10.4516"]
+}
+
+object busTimetableDataLoader {
+  loads_bus_timetable_data = ["Bus1: 08:00 - 18:00", "Bus2: 07:30 - 17:30"]
+}
+
+object busDataAnalyzer {
+  analyze_speed = "Bus1 Speed: 60 km/h, Bus2 Speed: 55 km/h"
+  check_punctuality = "Bus1: On-time, Bus2: Late by 5 mins"
+}
+
+object vehicle1 {
+  id = "Bus1"
+  position = "52.5200, 13.4050"
+  speed = 60
+}
+
+object vehicle2 {
+  id = "Bus2"
+  position = "51.1657, 10.4515"
+  speed = 55
+}
+
+object speedCalculator {
+  calculate_speed = "Bus1: 60 km/h, Bus2: 55 km/h"
+  detect_violation = "Bus2: Late by 5 mins"
+}
+
+busTracker --> busTrackingDataLoader : Uses
+busTracker --> busStationDataLoader : Uses
+busTracker --> busTimetableDataLoader : Uses
+busTracker --> busDataAnalyzer : Uses
+
+busTrackingDataLoader --> vehicle1 : Provides data to
+busStationDataLoader --> vehicle2 : Provides station data
+busDataAnalyzer --> speedCalculator : Uses
+@enduml

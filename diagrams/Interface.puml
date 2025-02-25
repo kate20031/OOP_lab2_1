@@ -1,0 +1,51 @@
+@startuml
+package "Bus Tracker System" {
+    interface DataLoader {
+        + loadData()
+    }
+
+    interface Analyzer {
+        + analyzeData()
+    }
+
+    interface UserInterface {
+        + displayReport()
+    }
+
+    class BusTracker {
+        + requestTrackingData()
+        + requestAnalysis()
+    }
+
+    class BusDataLoader {
+        + loadData()
+    }
+
+    class BusStationDataLoader {
+        + loadData()
+    }
+
+    class BusTimetableDataLoader {
+        + loadData()
+    }
+
+    class BusDataAnalyzer {
+        + analyzeData()
+    }
+
+    class UI {
+        + displayReport()
+    }
+
+    BusTracker ..|> DataLoader
+    BusDataLoader --|> DataLoader
+    BusStationDataLoader --|> DataLoader
+    BusTimetableDataLoader --|> DataLoader
+
+    BusTracker ..|> Analyzer
+    BusDataAnalyzer --|> Analyzer
+
+    BusTracker ..|> UserInterface
+    UI --|> UserInterface
+}
+@enduml

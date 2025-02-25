@@ -1,0 +1,18 @@
+@startuml
+actor User
+participant "BusDataLoader" as BDL
+participant "API" as API
+participant "Utils" as UTL
+participant "Database" as DB
+participant "Analytics" as ANA
+
+User -> BDL : requestBusTrackingData()
+BDL -> API : fetchData()
+API --> BDL : return JSON response
+BDL -> UTL : processData()
+UTL -> DB : storeData()
+BDL -> ANA : analyzeData()
+ANA -> DB : fetchRequiredData()
+ANA --> BDL : returnAnalysisResults()
+BDL --> User : returnReport()
+@enduml

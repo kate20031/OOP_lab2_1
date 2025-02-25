@@ -1,0 +1,10 @@
+@startuml
+[*] --> Idle
+
+Idle --> LoadingData : Data Loaded
+LoadingData --> TrackingBus : Tracking Started
+TrackingBus --> AnalyzingData : Data Collected
+AnalyzingData --> DisplayingResults : Punctuality Analyzed
+DisplayingResults --> Finished : Results Displayed
+
+@enduml
